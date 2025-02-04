@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Finance, Accounting, Management, Energy with AI Conference - Schedule</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.svg"/>
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="/css/bootstrap-5.0.0-beta2.min.css" />
+    <link rel="stylesheet" href="/css/LineIcons.2.0.css" />
+    <link rel="stylesheet" href="/css/tiny-slider.css" />
+    <link rel="stylesheet" href="/css/animate.css" />
+    <link rel="stylesheet" href="/css/glightbox.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      .timeline {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .timeline::after {
+        content: '';
+        position: absolute;
+        width: 6px;
+        background-color: #ddd;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -3px;
+      }
+
+      .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        background-color: inherit;
+        width: 50%;
+      }
+
+      .timeline-item::after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        right: -17px;
+        background-color: white;
+        border: 4px solid #FF9F55;
+        top: 15px;
+        border-radius: 50%;
+        z-index: 1;
+      }
+
+      .left {
+        left: 0;
+      }
+
+      .right {
+        left: 50%;
+      }
+
+      .left::before {
+        content: " ";
+        height: 0;
+        position: absolute;
+        top: 22px;
+        width: 0;
+        z-index: 1;
+        right: 30px;
+        border: medium solid #FF9F55;
+        border-width: 10px 0 10px 10px;
+        border-color: transparent transparent transparent #FF9F55;
+      }
+
+      .right::before {
+        content: " ";
+        height: 0;
+        position: absolute;
+        top: 22px;
+        width: 0;
+        z-index: 1;
+        left: 30px;
+        border: medium solid #FF9F55;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent #FF9F55 transparent transparent;
+      }
+
+      .right::after {
+        left: -16px;
+      }
+
+      .content {
+        padding: 20px 30px;
+        background-color: white;
+        position: relative;
+        border-radius: 6px;
+      }
+
+      .content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+    <!-- ========================= preloader start ========================= -->
+    <div class="preloader">
+      <div class="loader">
+        <div class="spinner">
+          <div class="spinner-container">
+            <div class="spinner-rotator">
+              <div class="spinner-left">
+                <div class="spinner-circle"></div>
+              </div>
+              <div class="spinner-right">
+                <div class="spinner-circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- ========================= header start ========================= -->
+    <%- include('./helpers/header') %>
+
+    <!-- ========================= header end ========================= -->
+
+    <!-- ========================= schedule-section start ========================= -->
+    <section id="schedule" class="schedule-section pt-150">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xxl-6 col-xl-7 col-lg-8">
+            <div class="section-title text-center mb-60">
+              <h1>Conference Schedule</h1>
+              <p>Explore the schedule of our conference and plan your day accordingly. Each session is designed to provide valuable insights and knowledge.</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline">
+          <% schedule.forEach((item, index) => { %>
+            <div class="timeline-item <%= index % 2 === 0 ? 'left' : 'right' %>">
+              <div class="content">
+                <h2 style="color: #FF9F55;"><%= item.title %></h2>
+                <!-- <h4 style="color: #FF9F55;"><%= item.title %></h4> -->
+                <p style="color: #FF9F55;"><%= item.event_description %></p>
+                <!-- <img src="<%= item.speaker_photo %>" alt="<%= item.speaker_name %>"> -->
+                <p style="color: #FF9F55;"><i class="lni lni-calendar" style="color: #FF9F55;"></i> <%= new Date(item.event_date).toDateString() %></p>
+                <p style="color: #FF9F55;"><i class="lni lni-map-marker" style="color: #FF9F55;"></i> <%= item.location %></p>
+                <p style="color: #FF9F55;">
+                  <% if (Array.isArray(item.speakers) && item.speakers.length > 0) { %>
+                  <ul>
+                    <% item.speakers.forEach(speaker => { %>
+                      <li style="color: #FF9F55;"> <i class="lni lni-user" style="color: #FF9F55;"></i>  <%= speaker.name %> - <%= speaker.title %>, <%= speaker.organization %></li>
+                    <% }) %>
+                  </ul>
+                  <% } else { %>
+                    <p>No speakers available.</p>
+                  <% } %>
+                </p>
+              </div>
+            </div>
+          <% }) %>
+            
+     
+        </div>
+      </div>
+    </section>
+    <!-- ========================= schedule-section end ========================= -->
+
+    <!-- ========================= footer start ========================= -->
+    <%- include('./helpers/footer') %>
+    <!-- ========================= footer end ========================= -->
+
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top btn-hover">
+      <i class="lni lni-chevron-up"></i>
+    </a>
+
+    <!-- ========================= JS here ========================= -->
+    <script src="/js/bootstrap-5.0.0-beta2.min.js"></script>
+    <script src="/js/tiny-slider.js"></script>
+    <script src="/js/count-up.min.js"></script>
+    <script src="/js/wow.min.js"></script>
+    <script src="/js/glightbox.min.js"></script>
+    <script src="/js/polyfill.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

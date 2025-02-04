@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Finance, Accounting, Management, Energy with AI Conference</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="img/favicon.svg" />
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- ========================= CSS here ========================= -->
+  <link rel="stylesheet" href="/css/bootstrap-5.0.0-beta2.min.css" />
+  <link rel="stylesheet" href="/css/LineIcons.2.0.css" />
+  <link rel="stylesheet" href="/css/tiny-slider.css" />
+  <link rel="stylesheet" href="/css/animate.css" />
+  <link rel="stylesheet" href="/css/glightbox.min.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+  <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+  <!-- ========================= preloader start ========================= -->
+  <div class="preloader">
+    <div class="loader">
+      <div class="spinner">
+        <div class="spinner-container">
+          <div class="spinner-rotator">
+            <div class="spinner-left">
+              <div class="spinner-circle"></div>
+            </div>
+            <div class="spinner-right">
+              <div class="spinner-circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- preloader end -->
+
+  <!-- ========================= header start ========================= -->
+  <%- include('./helpers/header') %>
+
+    <!-- ========================= header end ========================= -->
+
+    <!-- ========================= slider-section start ========================= -->
+    <section id="home" class="hero-area img-bg">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-content">
+              <h1>Welcome to <span>Fame 2025</span></h1>
+              <p>
+                The integration of Artificial Intelligence (AI) into the fields of finance, accounting, management, and
+                energy studies (collectively referred to as FAME) is transforming traditional practices and offering
+                innovative solutions. AI technologies are enhancing decision-making processes, improving efficiency, and
+                providing deeper insights across these domains.
+              </p>
+              <a href="/pricing" class="main-btn btn-hover">Register Now</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="hero-img">
+              <img src="img/hero/hero-img.jpg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ========================= slider-section end ========================= -->
+
+    <!-- ========================= upcoming-section start ========================= -->
+    <section id="about" class="upcoming-section pt-150">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xxl-6 col-xl-7 col-lg-8">
+            <div class="section-title text-center mb-60">
+              <h1>Know More Upcoming Conference</h1>
+              <p>More to be announced</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center" style="display: none;">
+          <% events.forEach(event=> { %>
+            <div class="col-lg-4 col-md-8 col-sm-10">
+              <div class="single-counter">
+                <div class="map-img">
+                  <img src="img/upcoming/map-img.svg" alt="">
+                </div>
+                <i class="lni lni-mic"></i>
+                <h4 class="countup">
+                  <%= event.count %>
+                </h4>
+                <span>
+                  <%= event.description %>
+                </span>
+                <a href="javascript:void(0)" class="main-btn btn-hover">Learn More</a>
+
+              </div>
+
+            </div>
+            <% }) %>
+
+        </div>
+      </div>
+    </section>
+    <!-- ========================= upcoming-section end ========================= -->
+
+    <!-- ========================= about-section start ========================= -->
+    <section id="about-professor" class="hero-area-speakers pt-150 img-bg">
+      <div class="container ">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+          <div class="col-10 col-sm-8 col-lg-6">
+            <img src="https://mays.tamu.edu/wp-content/uploads/2024/02/Headshot-Xenophon-Koufteros-202402.jpg"
+              class="d-block mx-lg-auto img-fluid rounded mb-2" alt="Xenophon Koufteros">
+          </div>
+          <div class="col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-3">Person of Honour</h1>
+            <h3>Xenophon Koufteros</h3>
+            <p class="lead">Professor, Fellow of the Decision Sciences Institute, Jenna & Calvin R. Guest Professor in
+              Business Administration, Eppright University Professorship in Undergraduate Teaching Excellence,
+              Editor-in-Chief, Decision Sciences Journal</p>
+            <span>Department of Information & Operations Management, Mays Business School, Texas A & M University</span>
+            <p>Tel: (979) 845-2254<br>Fax: (979) 845-5653</p>
+            <p>we're aMAYSing | <a href="https://mays.tamu.edu">mays.tamu.edu</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ========================= about-section end ========================= -->
+    <!-- ========================= speakers-section start ========================= -->
+    <section id="speakers" class="speakers-section pt-150" style="display: none;">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xxl-6 col-xl-7 col-lg-8">
+            <div class="section-title text-center mb-60 ">
+              <h1>Meet Our Speakers</h1>
+              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore
+                et dolore magna.</p>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <% speakers.forEach(speaker=> { %>
+            <div class="col-lg-4 col-md-6 col-sm-10 ">
+              <div class="single-speaker ">
+                <div class="speaker-img">
+                  <% if (speaker.photo_url) { %>
+                    <img src="<%= speaker.photo_url %>" class="img-thumbnail rounded-circle mb-2"
+                      alt="<%= speaker.first_name %> <%= speaker.last_name %>">
+                    <% } else { %>
+                      <img src="img/speaker/speaker-1.jpg" class="img-thumbnail rounded-circle mb-2"
+                        alt="<%= speaker.first_name %> <%= speaker.last_name %>">
+                      <% } %>
+                </div>
+                <div class="speaker-content ">
+                  <h3>
+                    <%= speaker.first_name %>
+                      <%= speaker.last_name %>
+                  </h3>
+                  <span>
+                    <%= speaker.title %>, <%= speaker.organization %>
+                  </span>
+                  <!-- <p><%= speaker.bio %></p> -->
+                </div>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+      </div>
+    </section>
+    <!-- ========================= speakers-section end ========================= -->
+    <!-- ========================= video-section start ========================= -->
+    <section id="video" class="video-section img-bg mt-120 pt-110 pb-200">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xxl-6 col-xl-7 col-lg-8">
+            <div class="section-title text-center mb-80">
+              <h1>Watch our Conference <br> video</h1>
+            </div>
+            <div class="video-btn-wrapper text-center">
+              <a href="#" class="video-btn glightbox"><i class="lni lni-play"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ========================= video-section end ========================= -->
+    <!-- ========================= hotel-section start ========================= -->
+    <section id="hotel" class="hotel-section pb-120"></section>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="background-hotel"></div>
+        <div class="col-xxl-6 col-xl-7 col-lg-8 mb-10">
+          <div class="section-title text-center mb-60">
+            <h1>Stay at Aquila Atlantis Hotel</h1>
+            <p>Experience luxury and comfort at the Aquila Atlantis Hotel, the official accommodation partner for the
+              conference.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-lg-6 order-lg-2">
+          <div class="hotel-img mt-10 mb-10">
+            <img
+              src="https://aquilahotels.com/wp-content/uploads/2017/05/web_AQUILA-ATLANTIS-HOTEL-LOBBY-AREA-14-1200x590.jpg"
+              alt="Aquila Atlantis Hotel" class="img-fluid rounded">
+          </div>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+          <div class="hotel-content">
+            <h2>Aquila Atlantis Hotel</h2>
+            <p>Aquila Atlantis Hotel makes the heart of Crete beat really fast. It’s the perfect setting for all kinds
+              of meetings and social events, perfectly located in the heart of Herakleion city. Guests either on a
+              working assignment or simply for leisure, can enjoy socializing through a wide range of activities
+              within or beyond the hotel’s premises.</p>
+            <a href="https://www.aquilahotels.com" class="main-btn btn-hover">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+    <!-- ========================= hotel-section end ========================= -->
+    <!-- ========================= pricing-section start ========================= -->
+    <section id="pricing" class="pricing-section pt-150">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xxl-6 col-xl-7 col-lg-8">
+            <div class="section-title text-center mb-60">
+              <h1>Buy Your Ticket Just Now</h1>
+              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore
+                et dolore magna,</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <% pricing.forEach(pricingTier=> { %>
+            <div class="col-lg-4 col-md-8 col-sm-10">
+              <div class="single-pricing" style="height: 100%;">
+                <h3>
+                  <%= pricingTier.pricing_name %>
+                </h3>
+                <span class="price">€<%= pricingTier.price %></span>
+                <p class="list" style="height: 25%;">
+                  <%= pricingTier.description %>
+                </p>
+              </div>
+            </div>
+            <% }) %>
+
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <a href="/pricing" class="main-btn btn-hover">Learn More</a>
+        
+      </div>
+    </section>
+    <!-- ========================= pricing-section end ========================= -->
+
+    <!-- ========================= blog-section start ========================= -->
+    <section id="blog" class="blog-section pt-150 pb-120" style="display: none;">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xxl-6 col-xl-7 col-lg-8">
+            <div class="section-title mb-60 text-center">
+              <h1>Our Latest Blog Post</h1>
+              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore
+                et dolore magna,</p>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <% blogs.forEach(blog=> { %>
+            <div class="col-lg-4 col-md-8">
+              <div class="single-blog blog-left">
+                <div class="image">
+                  <a href="javascript:void(0)">
+                    <img src="<%= blog.image %>" alt="">
+                  </a>
+                </div>
+                <div class="content">
+                  <div class="meta">
+                    <span class="author">Posted by: <a href="javascript:void(0)">
+                        <p><small>
+                            <%= blog.author %>
+                          </small></p>
+                      </a> </span>
+                    <span>
+                      <%= blog.date %>
+                    </span>
+                  </div>
+                  <h3>
+                    <a href="javascript:void(0)">
+                      <%= blog.title %>
+                    </a>
+                  </h3>
+                  <a href="javascript:void(0)">Read More</a>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+      </div>
+    </section>
+    <!-- ========================= blog-section end ========================= -->
+
+    <!-- ========================= footer start ========================= -->
+    <%- include('./helpers/footer') %>
+      <!-- ========================= footer end ========================= -->
+
+      <!-- ========================= scroll-top ========================= -->
+      <a href="#" class="scroll-top btn-hover">
+        <i class="lni lni-chevron-up"></i>
+      </a>
+
+      <!-- ========================= JS here ========================= -->
+      <script src="/js/bootstrap-5.0.0-beta2.min.js"></script>
+      <script src="/js/tiny-slider.js"></script>
+      <script src="/js/count-up.min.js"></script>
+      <script src="/js/wow.min.js"></script>
+      <script src="/js/glightbox.min.js"></script>
+      <script src="/js/polyfill.js"></script>
+      <script src="/js/main.js"></script>
+</body>

@@ -1,0 +1,97 @@
+<head>
+    <%- include('../helpers/header.ejs') %>
+    <title>FAME Admin- Dashboard</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <%- include('../helpers/sidebar.ejs') %>
+        <div id="content-wrapper">
+            <%- include('../helpers/navbar.ejs') %>
+            <div id="content">
+                <div class="container-fluid">
+                    <h1 class="h3 mb-4 text-gray-800">Edit Blog</h1>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Edit Blog</h6>
+                        </div>
+                        <div class="card-body">
+                            <form action="/admin/blogs/edit/<%= blog.blog_id %>" method="POST">
+                                <div class="form-group">
+                                    <label for="blog_title">Title</label>
+                                    <input type="text" class="form-control" id="blog_title" name="blog_title" value="<%= blog.title %>" required>
+                                    <label for="text_content">Content</label>
+                                    
+                                    <textarea class="form-control mb-2" id="text_content" name="text_content" rows="3" required><%= blog.content %></textarea>
+                                    
+                                    <button type="reset" class="btn btn-danger">
+                                        <i class="fas fa-forward"></i> 
+                                    </button>
+                                    <button type="button" class="btn btn-warning" onclick="undo()">
+                                        <i class="fas fa-undo-alt"></i> 
+                                    </button>
+                                    <button type="button" class="btn btn-info" onclick="redo()">
+                                        <i class="fas fa-redo-alt"></i> 
+                                    </button>
+                                    <button type="button" class="btn btn-dark" onclick="clearForm()">
+                                        <i class="fas fa-eraser"></i> 
+                                    </button>
+                                    <hr>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="button" class="btn btn-secondary" onclick="window.location.href='/admin/blogs'">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                        <script>
+                            let formHistory = [];
+                            let historyIndex = -1;
+
+                            document.getElementById('blog_title').addEventListener('input', saveState);
+                            document.getElementById('text_content').addEventListener('input', saveState);
+
+                            function saveState() {
+                                const state = {
+                                    title: document.getElementById('blog_title').value,
+                                    content: document.getElementById('text_content').value
+                                };
+                                formHistory = formHistory.slice(0, historyIndex + 1);
+                                formHistory.push(state);
+                                historyIndex++;
+                                console.log(formHistory);
+                            }
+
+                            function undo() {
+                                if (historyIndex > 0) {
+                                    historyIndex--;
+                                    const state = formHistory[historyIndex];
+                                    document.getElementById('blog_title').value = state.title;
+                                    document.getElementById('text_content').value = state.content;
+                                }
+                            }
+
+                            function redo() {
+                                if (historyIndex < formHistory.length - 1) {
+                                    historyIndex++;
+                                    const state = formHistory[historyIndex];
+                                    document.getElementById('blog_title').value = state.title;
+                                    document.getElementById('text_content').value = state.content;
+                                }
+                            }
+
+                            function clearForm() {
+                                document.getElementById('blog_title').value = '';
+                                document.getElementById('text_content').value = '';
+                                saveState();
+                            }
+
+                            // Initialize form history with the current state
+                            saveState();
+                        </script>
+                    </div>
+                    <%- include('../helpers/script.ejs') %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
