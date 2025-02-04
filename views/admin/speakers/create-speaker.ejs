@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include('../helpers/header.ejs') %>
+
+        <title>FAME Admin - Create Speaker</title>
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <%- include('../helpers/sidebar.ejs') %>
+            <div id="content-wrapper" class="d-flex flex-column">
+                <%- include('../helpers/navbar.ejs') %>
+                    <div id="content">
+                        <div class="container-fluid">
+                            <h1 class="h3 mb-4 text-gray-800">Create Speaker</h1>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Create New Speaker</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form action="/admin/speakers" method="POST" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="first_name">First Name:</label>
+                                            <input type="text" class="form-control" id="first_name" name="first_name"
+                                                required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="last_name">Last Name:</label>
+                                            <input type="text" class="form-control" id="last_name" name="last_name"
+                                                required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email:</label>
+                                            <input type="email" class="form-control" id="email" name="email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="title">Title:</label>
+                                            <input type="text" class="form-control" id="title" name="title" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="organization">Organization:</label>
+                                            <input type="text" class="form-control" id="organization"
+                                                name="organization" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="session_id">Event:</label>
+                                            <select class="form-control" id="session_id" name="session_id" required>
+                                                <option value="0" disabled >Please Select Event</option>
+                                                <% events.forEach(function(event) { %>
+                                                    <option value="<%= event.event_id %>">
+                                                        <%= event.title %>
+                                                    </option>
+                                                    <% }); %>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bio">Bio:</label>
+                                            <textarea class="form-control" id="bio" name="bio" rows="3"
+                                                required></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="photo_url">Photo URL:</label>
+                                            <input type="text" class="form-control" id="photo_url" name="photo_url">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="photo">Upload Photo:</label>
+                                            <input type="file" class="form-control-file" id="photo" name="photo">
+                                        </div>
+                                        
+
+                                        <button type="submit" class="btn btn-primary">Create Speaker</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    </div>
+    <%- include('../helpers/script.ejs') %>
+
+</body>
+
+</html>

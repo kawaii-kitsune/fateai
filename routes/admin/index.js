@@ -26,7 +26,7 @@ function isAuthenticated(req, res, next) {
 
 // Middleware to check if user is admin
 function isAdmin(req, res, next) {
-  if (req.session.user && req.session.user.username === 'admin') {
+  if (req.session.user && (req.session.user.username === 'admin'|| req.session.user.user_id === 1)) {
     return next();
   } else {
     res.status(403).send('Forbidden');
@@ -36,10 +36,14 @@ function isAdmin(req, res, next) {
 // Set up multer for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/speakers');
+    const uploadDir = path.join(__dirname, '../../assets/uploads/speakers');
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
+    cb(null, `${Date.now()}-${file.originalname}`);
   }
 });
 const upload = multer({ storage: storage });
@@ -283,7 +287,7 @@ router.post('/blogs/edit/:id', (req, res) => {
           return res.status(500).send('Error updating blog post');
       }
       
-      res.render('/admin/blogs', { message: 'Blog post updated successfully', user: req.session.user });
+      res.render('admin/blogs/blogs', { message: 'Blog post updated successfully', user: req.session.user });
   });
 });
 
@@ -297,38 +301,73 @@ router.get('/blogs/delete/:id', isAdmin, (req, res) => {
       console.error('Error deleting blog post:', err);
       return res.status(500).send('Error deleting blog post');
     }
-    res.render('/admin/blogs', { message: 'Blog post deleted successfully', user: req.session.user });
+    const query = 'SELECT * FROM blogs';
+    connection.query(query, (err, results) => {
+      if (err) {
+        console.error('Error fetching blogs:', err);
+        return res.status(500).send('Error fetching blogs');
+      }
+      res.render('admin/blogs/blogs', { blogs: results, user: req.session.user, message: 'Blog post deleted successfully' });
+    });
   });
 });
 
 //=====================================BLOGS=================================
 
-// Handle event deletion
-router.get('/events/delete/:id', isAdmin, (req, res) => {
-  const eventId = req.params.id;
-  const query = 'DELETE FROM events WHERE event_id = ?';
-  connection.query(query, [eventId], (err, result) => {
-    if (err) {
-      console.error('Error deleting event:', err);
-      return res.status(500).send('Error deleting event');
-    }
-    res.redirect('/admin');
-  });
+//=====================================Papers=================================
+// Get all papers
+router.get('/papers', isAuthenticated, (req, res) => {
+  const papersDir = path.join(__dirname, '../../assets/uploads/papers');
+  fs.promises.readdir(papersDir)
+    .then(files => {
+      const papers = files.map(file => {
+        const filePath = path.join(papersDir, file);
+        const stats = fs.statSync(filePath);
+        return {
+          name: file,
+          size: stats.size,
+          downloadLink: `/uploads/papers/${file}`,
+          createdAt: stats.birthtime
+        };
+      });
+      res.render('admin/papers/papers', { papers, user: req.session.user });
+    })
+    .catch(err => {
+      console.error('Error fetching papers:', err);
+      res.status(500).send('Error fetching papers');
+    });
 });
 
+router.get('/papers/new', isAuthenticated, (req, res) => {
+  res.render('admin/papers/upload-paper', { user: req.session.user });
+});
 // Handle file deletion
 router.get('/files/delete/:filename', isAdmin, (req, res) => {
   const filename = req.params.filename;
-  const filePath = path.join(__dirname, '../../assets/uploads', filename);
+  const filePath = path.join(__dirname, '../../assets/uploads/papers/', filename);
   fs.unlink(filePath, (err) => {
     if (err) {
       console.error('Error deleting file:', err);
       return res.status(500).send('Error deleting file');
     }
-    res.redirect('/admin');
+    res.redirect('/admin/papers');
   });
 });
+//=====================================Papers=================================
 
+//=====================================Speakers=================================
+
+// Get all speakers
+router.get('/speakers', isAuthenticated, (req, res) => {
+  const query = 'SELECT * FROM speakers';
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching speakers:', err);
+      return res.status(500).send('Error fetching speakers');
+    }
+    res.render('admin/speakers/speakers', { speakers: results, user: req.session.user });
+  });
+});
 // Edit speaker page
 router.get('/speakers/edit/:id', isAuthenticated, (req, res) => {
   const speakerId = req.params.id;
@@ -341,23 +380,30 @@ router.get('/speakers/edit/:id', isAuthenticated, (req, res) => {
     if (results.length === 0) {
       return res.status(404).send('Speaker not found');
     }
-    res.render('admin/edit-speaker', { speaker: results[0] });
+    const eventsQuery = 'SELECT * FROM events';
+    connection.query(eventsQuery, (err, events) => {
+      if (err) {
+        console.error('Error fetching events:', err);
+        return res.status(500).send('Error fetching events');
+      }
+      res.render('admin/speakers/edit-speaker', {speaker: results[0], events, user: req.session.user });
+    });
   });
 });
 
 // Handle speaker editing
 router.post('/speakers/edit/:id', isAuthenticated, upload.single('photo'), (req, res) => {
   const speakerId = req.params.id;
-  const { first_name, last_name, title, organization, bio, photo_url } = req.body;
+  const { first_name, last_name, title, organization, bio, photo_url, session_id } = req.body;
   const photo = req.file ? `/uploads/speakers/${req.file.filename}` : photo_url;
 
-  const query = 'UPDATE speakers SET first_name = ?, last_name = ?, title = ?, organization = ?, bio = ?, photo_url = ? WHERE speaker_id = ?';
-  connection.query(query, [first_name, last_name, title, organization, bio, photo, speakerId], (err, result) => {
+  const query = 'UPDATE speakers SET first_name = ?, last_name = ?, title = ?, organization = ?, bio = ?, photo_url = ?, session_id = ? WHERE speaker_id = ?';
+  connection.query(query, [first_name, last_name, title, organization, bio, photo, session_id, speakerId], (err, result) => {
     if (err) {
       console.error('Error updating speaker:', err);
       return res.status(500).send('Error updating speaker');
     }
-    res.redirect('/admin');
+    res.render('admin/speakers/speakers', { message: 'Speaker updated successfully', user: req.session.user });
   });
 });
 
@@ -370,9 +416,69 @@ router.get('/speakers/delete/:id', isAdmin, (req, res) => {
       console.error('Error deleting speaker:', err);
       return res.status(500).send('Error deleting speaker');
     }
+    res.render('admin/speakers/speakers', { message: 'Speaker deleted successfully', user: req.session.user });
+  });
+});
+// New speaker page
+router.get('/speakers/new', isAuthenticated, (req, res) => {
+  const eventsQuery = 'SELECT * FROM events';
+  connection.query(eventsQuery, (err, results) => {
+    if (err) {
+      console.error('Error fetching events:', err);
+      return res.status(500).send('Error fetching events');
+    }
+    res.render('admin/speakers/create-speaker', { user: req.session.user, events: results });
+  });
+});
+
+// Handle new speaker creation
+
+router.post('/speakers', isAuthenticated, upload.single('photo'), (req, res) => {
+  const { first_name, last_name, email, session_id, title, organization, bio, photo_url } = req.body;
+  
+  const photo = req.file ? `/uploads/speakers/${req.file.filename}` : photo_url;
+
+  // Ensure the uploads/speakers directory exists
+  const uploadDir = path.join(__dirname, '../../assets/uploads/speakers');
+  if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+  }
+
+  const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  const updated_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+  const query = 'INSERT INTO speakers (first_name, last_name, email, title, organization, bio, photo_url, session_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  connection.query(query, [first_name, last_name, email, title, organization, bio, photo, session_id, created_at, updated_at], (err, result) => {
+    if (err) {
+      console.error('Error creating speaker:', err);
+      return res.status(500).send('Error creating speaker');
+    }
+    const eventSpeakersQuery = 'INSERT INTO event_speakers (event_id, speaker_id) VALUES (?, ?)';
+    connection.query(eventSpeakersQuery, [session_id, result.insertId], (err, result) => {
+      if (err) {
+        console.error('Error creating event_speakers entry:', err);
+        return res.status(500).send('Error creating event_speakers entry');
+      }
+      res.redirect('/admin/speakers');
+    });
+  });
+});
+//=====================================Speakers=================================
+
+//=====================================EVENTS=================================
+// // Handle event deletion
+router.get('/events/delete/:id', isAdmin, (req, res) => {
+  const eventId = req.params.id;
+  const query = 'DELETE FROM events WHERE event_id = ?';
+  connection.query(query, [eventId], (err, result) => {
+    if (err) {
+      console.error('Error deleting event:', err);
+      return res.status(500).send('Error deleting event');
+    }
     res.redirect('/admin');
   });
 });
+//=====================================EVENTS=================================
 
 // Handle logout
 router.get('/logout', (req, res) => {

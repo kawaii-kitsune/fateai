@@ -78,13 +78,17 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Call for Papers:</h6>
-                        <a class="collapse-item" href="login.html">View Papers</a>
-                        <a class="collapse-item" href="register.html">Edit Papers</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Pesons:</h6>
-                        <a class="collapse-item" href="404.html">Speakers</a>
-                        <a class="collapse-item" href="blank.html">Users</a>
-                    </div>
+                        <a class="collapse-item" href="/admin/papers">
+                            <i class="fas fa-fw fa-eye"></i> View Papers
+                        </a>
+                        <a class="collapse-item" href="/admin/papers/new">
+                            <i class="fas fa-fw fa-upload"></i> Upload Papers
+                        </a>        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header"><i class="fas fa-fw fa-user"></i> PERSONS:</h6>
+                        <a class="collapse-item" href="/admin/speakers">Speakers</a>
+                        <% if (user.username === 'admin') { %>
+                            <a class="collapse-item" href="/users">Users</a>
+                        <% } %>        </div>
                 </div>
             </li>
 

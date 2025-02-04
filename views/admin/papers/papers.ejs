@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../helpers/header.ejs') %>
+        <title>File Viewer</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <%- include('../helpers/sidebar.ejs') %>
+            <div id="content-wrapper" class="d-flex flex-column">
+                <%- include('../helpers/navbar.ejs') %>
+                    <div id="content">
+                        <% if (typeof message !=='undefined' ) { %>
+                            <div class="alert alert-info" role="alert"></div>
+                            <%= message %>
+                    </div>
+                    <% } %>
+                        <div class="container-fluid">
+                            <h1 class="h3 mb-4 text-gray-800">File Viewer</h1>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">All Files</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <% if (papers && papers.length> 0) { %>
+                                            <table class="table table-bordered" id="dataTable" width="100%"
+                                                cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>File Name</th>
+                                                        <th>Size (bytes)</th>
+                                                        <th>Created At</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% papers.forEach(function(file) { %>
+                                                        <tr>
+                                                            <td>
+                                                                <%= file.name %>
+                                                            </td>
+                                                            <td>
+                                                                <%= file.size %>
+                                                            </td>
+                                                            <td>
+                                                                <%= file.createdAt %>
+                                                            </td>
+                                                            <td>
+                                                                <a href="/admin/files/delete/<%= file.name %>"
+                                                                    class="btn btn-sm btn-danger"
+                                                                    onclick="return confirm('Are you sure you want to delete this file?');">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                                <!-- <a href="<%= file.downloadLink %>" class="btn btn-sm btn-primary">View</a> -->
+                                                                <a href="<%= file.downloadLink %>"
+                                                                    class="btn btn-sm btn-success">
+                                                                    <i class="fas fa-download"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        <% }); %>
+                                                </tbody>
+                                            </table>
+                                            <% } else { %>
+                                                <p>No files available at the moment.</p>
+                                                <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Upload Paper</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form action="/admin/files/upload" method="post" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="file">Choose file to upload</label>
+                                            <input type="file" class="form-control" id="file" name="file" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Upload</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+    </div>
+    </div>
+    <%- include('../helpers/script.ejs') %>
+</body>
+
+</html>
