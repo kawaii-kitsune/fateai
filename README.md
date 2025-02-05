@@ -34,3 +34,10 @@
     for developer
 
 Your application should now be running. Open your browser and navigate to `http://localhost:3000` to see it in action.
+## Technologies Used
+
+- **Node.js**: JavaScript runtime built on Chrome's V8 JavaScript engine.
+- **Express.js**: Fast, unopinionated, minimalist web framework for Node.js.
+- **Docker**: Platform for developing, shipping, and running applications in containers.
+- **MariaDB**: NoSQL database for storing application data.
+- **Ejs**: JavaScript library for building user interfaces.
