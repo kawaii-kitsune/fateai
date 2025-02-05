@@ -53,7 +53,7 @@
     <!-- ========================= header end ========================= -->
 
     <!-- ========================= slider-section start ========================= -->
-    <section id="home" class="hero-area img-bg">
+    <section id="home" class="hero-area img-bg " hidden>
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-6">
@@ -90,7 +90,7 @@
           </div>
         </div>
 
-        <div class="row justify-content-center" style="display: none;">
+        <div class="row justify-content-center" hidden>
           <% events.forEach(event=> { %>
             <div class="col-lg-4 col-md-8 col-sm-10">
               <div class="single-counter">
@@ -118,14 +118,15 @@
 
     <!-- ========================= about-section start ========================= -->
     <section id="about-professor" class="hero-area-speakers pt-150 img-bg">
-      <div class="container ">
+      <div class="container">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
           <div class="col-10 col-sm-8 col-lg-6">
             <img src="https://mays.tamu.edu/wp-content/uploads/2024/02/Headshot-Xenophon-Koufteros-202402.jpg"
-              class="d-block mx-lg-auto img-fluid rounded mb-2" alt="Xenophon Koufteros">
+              class="d-block mx-lg-auto img-fluid rounded mb-2" alt="Xenophon Koufteros"
+              style="width: 400px; height: 500px; object-fit: cover;">
           </div>
           <div class="col-lg-6">
-            <h1 class="display-5 fw-bold lh-1 mb-3">Person of Honour</h1>
+            <!-- <h1 class="display-5 fw-bold lh-1 mb-3">Person of Honour</h1> -->
             <h3>Xenophon Koufteros</h3>
             <p class="lead">Professor, Fellow of the Decision Sciences Institute, Jenna & Calvin R. Guest Professor in
               Business Administration, Eppright University Professorship in Undergraduate Teaching Excellence,
@@ -135,11 +136,37 @@
             <p>we're aMAYSing | <a href="https://mays.tamu.edu">mays.tamu.edu</a></p>
           </div>
         </div>
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+          <div class="col-10 col-sm-8 col-lg-6">
+            <img src="https://www.hse.ru/data/2011/11/13/1272015355/4pard.jpg"
+              class="d-block mx-lg-auto img-fluid rounded mb-2" alt="Panos M. Pardalos"
+              style="width: 400px; height: 500px; object-fit: cover;">
+          </div>
+          <div class="col-lg-6">
+            <!-- <h1 class="display-5 fw-bold lh-1 mb-3">Person of Honour</h1> -->
+            <h3>Panos M. Pardalos</h3>
+            <p class="lead">Distinguished Professor, Industrial and Systems Engineering</p>
+            <span>Email: pardalos@ufl.edu<br>Mailing Address: P.O. Box 116595, Gainesville, FL 32611-6595<br>Office
+              Location: 401 Weil Hall</span>
+            <p>Research Interests: Sustainable interconnected networks, Biological networks, Cooperative networks</p>
+            <p>About: Professor Panos M. Pardalos serves as distinguished professor of industrial and systems
+              engineering
+              at the University of Florida. Additionally, he is the Paul and Heidi Brown Preeminent Professor of
+              industrial and systems engineering. He is also an affiliated faculty member of the computer and
+              information
+              science Department, the Hellenic Studies Center, and the biomedical engineering program. He is also the
+              director of the Center for Applied Optimization. Pardalos is a world leading expert in global and
+              combinatorial optimization. His recent research interests include network design problems, optimization in
+              telecommunications, e-commerce, data mining, biomedical applications, and massive computing.</p>
+            <p><a href="https://www.ise.ufl.edu/pardalos/">Dr. Pardalos’ website</a></p>
+            <p>Education: Ph.D. University of Minnesota (1985)</p>
+          </div>
+        </div>
       </div>
     </section>
     <!-- ========================= about-section end ========================= -->
     <!-- ========================= speakers-section start ========================= -->
-    <section id="speakers" class="speakers-section pt-150" style="display: none;">
+    <section id="speakers" class="speakers-section pt-150" hidden>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xxl-6 col-xl-7 col-lg-8">
@@ -182,7 +209,7 @@
     </section>
     <!-- ========================= speakers-section end ========================= -->
     <!-- ========================= video-section start ========================= -->
-    <section id="video" class="video-section img-bg mt-120 pt-110 pb-200">
+    <section id="video" class="video-section img-bg mt-120 pt-110 pb-200" hidden>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xxl-6 col-xl-7 col-lg-8">
@@ -265,7 +292,7 @@
       </div>
       <div class="text-center mt-10">
         <a href="/pricing" class="main-btn btn-hover">Learn More</a>
-        
+
       </div>
     </section>
     <!-- ========================= pricing-section end ========================= -->
