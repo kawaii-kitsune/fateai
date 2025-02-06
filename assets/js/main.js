@@ -18,14 +18,14 @@
     window.onscroll = function () {
         var header_navbar = document.querySelector(".navbar-area");
         var sticky = header_navbar.offsetTop;
-        var logo = document.querySelector(".navbar-brand img");
+        // var logo = document.querySelector(".navbar-brand img");
 
         if (window.pageYOffset > sticky) {
             header_navbar.classList.add("sticky");
-            logo.src = 'img/logo/fame/4.png'
+            // logo.src = 'img/logo/fame/4.png'
         } else {
             header_navbar.classList.remove("sticky");
-            logo.src = 'img/logo/fame/1.png'
+            // logo.src = 'img/logo/fame/1.png'
         }
 
 

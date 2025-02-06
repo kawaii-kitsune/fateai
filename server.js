@@ -13,6 +13,7 @@ const uploadsRouter = require('./routes/user/uploads');
 const adminRouter = require('./routes/admin/index');
 const bodyParser = require('body-parser');
 const apiRoutes = require('./routes/api/crud');
+const scRoutes = require('./routes/user/sc');
 // Serve Bootstrap Icons CSS
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
@@ -45,6 +46,7 @@ app.use('/cfp', cfpRouter);
 app.use('/uploads', uploadsRouter);
 app.use('/admin', adminRouter);
 app.use('/api', apiRoutes);
+app.use('/sc', scRoutes);
 // Start server
 app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000');
