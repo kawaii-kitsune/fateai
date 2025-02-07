@@ -32,6 +32,7 @@ app.use('/css', express.static(path.join(__dirname, './assets/css')));
 app.use('/img', express.static(path.join(__dirname, './assets/img')));
 app.use('/fonts', express.static(path.join(__dirname, './assets/fonts')));
 app.use('/uploads', express.static(path.join(__dirname, './assets/uploads')));
+app.use('/admin/assets/uploads/submitions', express.static(path.join(__dirname, './assets/uploads/submitions')));
 
 
 // Use routers

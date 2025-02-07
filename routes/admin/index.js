@@ -26,7 +26,7 @@ function isAuthenticated(req, res, next) {
 
 // Middleware to check if user is admin
 function isAdmin(req, res, next) {
-  if (req.session.user && (req.session.user.username === 'admin'|| req.session.user.user_id === 1)) {
+  if (req.session.user && (req.session.user.username === 'admin' || req.session.user.user_id === 1)) {
     return next();
   } else {
     res.status(403).send('Forbidden');
@@ -162,15 +162,15 @@ router.get('/', isAuthenticated, async (req, res) => {
       })
     ]);
 
-    res.render('admin/dashboard', { 
-      files, 
-      stats, 
-      recentActivities, 
-      users, 
-      events, 
-      blogs, 
-      speakers, 
-      user: req.session.user 
+    res.render('admin/dashboard', {
+      files,
+      stats,
+      recentActivities,
+      users,
+      events,
+      blogs,
+      speakers,
+      user: req.session.user
     });
   } catch (err) {
     console.error('Error fetching dashboard data:', err);
@@ -206,7 +206,7 @@ router.get('/blogs', isAuthenticated, (req, res) => {
     }
     res.render('admin/blogs/blogs', { blogs: results, user: req.session.user });
   });
-  
+
 });
 
 router.get('/blogs/edit/:id', isAuthenticated, (req, res) => {
@@ -250,20 +250,20 @@ router.post('/blogs', isAuthenticated, (req, res) => {
           return res.status(500).send('Error fetching blogs');
         }
         return res.render('admin/blogs/blogs', { blogs: results, user: req.session.user, message: 'Error inserting blog post' });
-      }); 
+      });
     }
     const blogsQuery = `
       SELECT blogs.*, users.username AS author
       FROM blogs
       JOIN users ON blogs.author_id = users.user_id
     `;
-      connection.query(blogsQuery, (err, results) => {
-        if (err) {
-          console.error('Error fetching blogs:', err);
-          return res.status(500).send('Error fetching blogs');
-        }
-        res.render('admin/blogs/blogs', { user: req.session.user,message: 'Blog post created successfully' ,blogs: results });
-      }); 
+    connection.query(blogsQuery, (err, results) => {
+      if (err) {
+        console.error('Error fetching blogs:', err);
+        return res.status(500).send('Error fetching blogs');
+      }
+      res.render('admin/blogs/blogs', { user: req.session.user, message: 'Blog post created successfully', blogs: results });
+    });
   });
 });
 
@@ -275,19 +275,19 @@ router.post('/blogs/edit/:id', (req, res) => {
   const { blog_title, text_content } = req.body;
 
   if (!blog_title || !text_content) {
-      return res.status(400).send('Title and content are required.');
+    return res.status(400).send('Title and content are required.');
   }
 
   const query = 'UPDATE blogs SET title = ?, content = ?, updated_at = ? WHERE blog_id = ?';
   const updated_at = new Date();
 
   connection.query(query, [blog_title, text_content, updated_at, blogId], (err, result) => {
-      if (err) {
-          console.error('Error updating blog post:', err);
-          return res.status(500).send('Error updating blog post');
-      }
-      
-      res.render('admin/blogs/blogs', { message: 'Blog post updated successfully', user: req.session.user });
+    if (err) {
+      console.error('Error updating blog post:', err);
+      return res.status(500).send('Error updating blog post');
+    }
+
+    res.render('admin/blogs/blogs', { message: 'Blog post updated successfully', user: req.session.user });
   });
 });
 
@@ -317,25 +317,37 @@ router.get('/blogs/delete/:id', isAdmin, (req, res) => {
 //=====================================Papers=================================
 // Get all papers
 router.get('/papers', isAuthenticated, (req, res) => {
-  const papersDir = path.join(__dirname, '../../assets/uploads/papers');
-  fs.promises.readdir(papersDir)
-    .then(files => {
-      const papers = files.map(file => {
-        const filePath = path.join(papersDir, file);
-        const stats = fs.statSync(filePath);
-        return {
-          name: file,
-          size: stats.size,
-          downloadLink: `/uploads/papers/${file}`,
-          createdAt: stats.birthtime
-        };
-      });
-      res.render('admin/papers/papers', { papers, user: req.session.user });
-    })
-    .catch(err => {
+  // const papersDir = path.join(__dirname, '../../assets/uploads/papers');
+  // fs.promises.readdir(papersDir)
+  //   .then(files => {
+  //     const papers = files.map(file => {
+  //       const filePath = path.join(papersDir, file);
+  //       const stats = fs.statSync(filePath);
+  //       return {
+  //         name: file,
+  //         size: stats.size,
+  //         downloadLink: `/uploads/papers/${file}`,
+  //         createdAt: stats.birthtime
+  //       };
+  //     });
+  //     res.render('admin/papers/papers', { papers, user: req.session.user });
+  //   })
+  //   .catch(err => {
+  //     console.error('Error fetching papers:', err);
+  //     res.status(500).send('Error fetching papers');
+  //   });
+  const papersQuery = 'SELECT * FROM papers';
+  connection.query(papersQuery, (err, results) => {
+    if (err) {
       console.error('Error fetching papers:', err);
-      res.status(500).send('Error fetching papers');
-    });
+      return res.status(500).send('Error fetching papers');
+    }
+    const papers = results.map(paper => ({
+      ...paper,
+      downloadLink: `/uploads/papers/${path.basename(paper.file_path)}`
+    }));
+    res.render('admin/papers/papers', { papers, user: req.session.user });
+  });
 });
 
 router.get('/papers/new', isAuthenticated, (req, res) => {
@@ -386,7 +398,7 @@ router.get('/speakers/edit/:id', isAuthenticated, (req, res) => {
         console.error('Error fetching events:', err);
         return res.status(500).send('Error fetching events');
       }
-      res.render('admin/speakers/edit-speaker', {speaker: results[0], events, user: req.session.user });
+      res.render('admin/speakers/edit-speaker', { speaker: results[0], events, user: req.session.user });
     });
   });
 });
@@ -435,7 +447,7 @@ router.get('/speakers/new', isAuthenticated, (req, res) => {
 
 router.post('/speakers', isAuthenticated, upload.single('photo'), (req, res) => {
   const { first_name, last_name, email, session_id, title, organization, bio, photo_url } = req.body;
-  
+
   const photo = req.file ? `/uploads/speakers/${req.file.filename}` : photo_url;
 
   // Ensure the uploads/speakers directory exists
@@ -479,7 +491,194 @@ router.get('/events/delete/:id', isAdmin, (req, res) => {
   });
 });
 //=====================================EVENTS=================================
+//=====================================MESSAGES=================================
 
+// Get all messages
+router.get('/messages', isAuthenticated, (req, res) => {
+  const query = 'SELECT * FROM contact_messages';
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching messages:', err);
+      return res.status(500).send('Error fetching messages');
+    }
+    res.render('admin/messages/messages', { messages: results, user: req.session.user });
+  });
+});
+
+// Handle message deletion
+router.get('/messages/delete/:id', isAdmin, (req, res) => {
+  const messageId = req.params.id;
+  const query = 'DELETE FROM messages WHERE message_id = ?';
+  connection.query(query, [messageId], (err, result) => {
+    if (err) {
+      console.error('Error deleting message:', err);
+      return res.status(500).send('Error deleting message');
+    }
+    res.redirect('/admin/messages');
+  });
+});
+
+// Get all categories
+router.get('/categories', isAuthenticated, (req, res) => {
+  const categoriesQuery = 'SELECT * FROM categories';
+  connection.query(categoriesQuery, (err, results) => {
+    if (err) {
+      console.error('Error fetching categories:', err);
+      return res.status(500).send('Error fetching categories');
+    }
+    res.render('admin/categories/categories', { categories: results, user: req.session.user });
+  });
+});
+
+// New category page
+router.get('/categories/new', isAuthenticated, (req, res) => {
+  res.render('admin/categories/create-category', { user: req.session.user });
+});
+
+// Handle new category creation
+
+//=====================================MESSAGES=================================
+// Get all events
+router.get('/events', isAuthenticated, (req, res) => {
+  const eventsQuery = `
+    SELECT events.*, GROUP_CONCAT(DISTINCT categories.name) AS categories, GROUP_CONCAT(DISTINCT speakers.first_name, ' ', speakers.last_name) AS speakers
+    FROM events
+    LEFT JOIN event_categories ON events.event_id = event_categories.event_id
+    LEFT JOIN categories ON event_categories.category_id = categories.category_id
+    LEFT JOIN event_speakers ON events.event_id = event_speakers.event_id
+    LEFT JOIN speakers ON event_speakers.speaker_id = speakers.speaker_id
+    GROUP BY events.event_id
+  `;
+  connection.query(eventsQuery, (err, results) => {
+    if (err) {
+      console.error('Error fetching events:', err);
+      return res.status(500).send('Error fetching events');
+    }
+    res.render('admin/events/events', { events: results, user: req.session.user });
+  });
+});
+// New event page
+router.get('/events/new', isAuthenticated, (req, res) => {
+  const categoriesQuery = 'SELECT * FROM categories';
+  const speakersQuery = 'SELECT * FROM speakers';
+
+  connection.query(categoriesQuery, (err, categories) => {
+    if (err) {
+      console.error('Error fetching categories:', err);
+      return res.status(500).send('Error fetching categories');
+    }
+    console.log('Fetched categories:', categories);
+    connection.query(speakersQuery, (err, speakers) => {
+      if (err) {
+        console.error('Error fetching speakers:', err);
+        return res.status(500).send('Error fetching speakers');
+      }
+      console.log('Fetched speakers:', speakers);
+      res.render('admin/events/create-event', { user: req.session.user, categories, speakers });
+    });
+  });
+});
+
+// Handle new event creation
+router.post('/events', isAuthenticated, (req, res) => {
+  const { title, description, location, event_date } = req.body;
+  const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+  const query = 'INSERT INTO events (title, description, location, event_date, created_at) VALUES (?, ?, ?, ?, ?)';
+  connection.query(query, [title, description, location, event_date, created_at], (err, result) => {
+    if (err) {
+      console.error('Error creating event:', err);
+      return res.status(500).send('Error creating event');
+    }
+    res.redirect('/admin/events');
+  });
+});
+
+// Edit event page
+router.get('/events/edit/:id', isAuthenticated, (req, res) => {
+  const eventId = req.params.id;
+  const eventQuery = 'SELECT * FROM events WHERE event_id = ?';
+  const categoriesQuery = 'SELECT * FROM categories';
+  const speakersQuery = 'SELECT * FROM speakers';
+
+  connection.query(eventQuery, [eventId], (err, eventResults) => {
+    if (err) {
+      console.error('Error fetching event:', err);
+      return res.status(500).send('Error fetching event');
+    }
+    if (eventResults.length === 0) {
+      return res.status(404).send('Event not found');
+    }
+
+    connection.query(categoriesQuery, (err, categories) => {
+      if (err) {
+        console.error('Error fetching categories:', err);
+        return res.status(500).send('Error fetching categories');
+      }
+
+      connection.query(speakersQuery, (err, speakers) => {
+        if (err) {
+          console.error('Error fetching speakers:', err);
+          return res.status(500).send('Error fetching speakers');
+        }
+
+        res.render('admin/events/edit-event', {
+          event: eventResults[0],
+          categories,
+          speakers,
+          user: req.session.user
+        });
+      });
+    });
+  });
+});
+
+// Handle event editing
+router.post('/events/edit/:id', isAuthenticated, (req, res) => {
+  const eventId = req.params.id;
+  const { title, description, location, event_date } = req.body;
+  const updated_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+  const query = 'UPDATE events SET title = ?, description = ?, location = ?, event_date = ?, updated_at = ? WHERE event_id = ?';
+  connection.query(query, [title, description, location, event_date, updated_at, eventId], (err, result) => {
+    if (err) {
+      console.error('Error updating event:', err);
+      return res.status(500).send('Error updating event');
+    }
+    res.redirect('/admin/events');
+  });
+});
+
+// Handle event deletion
+router.get('/events/delete/:id', isAdmin, (req, res) => {
+  const eventId = req.params.id;
+  const deleteEventQuery = 'DELETE FROM events WHERE event_id = ?';
+  const deleteEventCategoriesQuery = 'DELETE FROM event_categories WHERE event_id = ?';
+  const deleteEventSpeakersQuery = 'DELETE FROM event_speakers WHERE event_id = ?';
+
+  connection.query(deleteEventQuery, [eventId], (err, result) => {
+    if (err) {
+      console.error('Error deleting event:', err);
+      return res.status(500).send('Error deleting event');
+    }
+
+    connection.query(deleteEventCategoriesQuery, [eventId], (err, result) => {
+      if (err) {
+        console.error('Error deleting event categories:', err);
+        return res.status(500).send('Error deleting event categories');
+      }
+
+      connection.query(deleteEventSpeakersQuery, [eventId], (err, result) => {
+        if (err) {
+          console.error('Error deleting event speakers:', err);
+          return res.status(500).send('Error deleting event speakers');
+        }
+
+        res.redirect('/admin/events');
+      });
+    });
+  });
+});
 // Handle logout
 router.get('/logout', (req, res) => {
   req.session.destroy();

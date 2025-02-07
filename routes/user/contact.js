@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
+const connection = require('../../database/database');
 
 router.get('/', (req, res) => {
   res.render('contact');
@@ -36,5 +37,18 @@ router.post('/', (req, res) => {
     res.send('Email sent successfully');
   });
 });
+// Handle new message creation
+router.post('/messages', (req, res) => {
+  const { fullname, emailaddress, subject, comments } = req.body;
+  const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
+  const query = 'INSERT INTO contact_messages (fullname, emailaddress, subject, message, created_at) VALUES (?, ?, ?, ?, ?)';
+  connection.query(query, [fullname, emailaddress, subject, comments, created_at], (err, result) => {
+    if (err) {
+      console.error('Error creating message:', err);
+      return res.status(500).send('Error creating message');
+    }
+    res.redirect('/');
+  });
+});
 module.exports = router;

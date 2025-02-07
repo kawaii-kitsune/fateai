@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html class="no-js" lang="">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Finance, Accounting, Management, Energy with AI Conference - Scientific Commitee</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.svg"/>
-    <!-- Place favicon.ico in the root directory -->
 
-    <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="/css/bootstrap-5.0.0-beta2.min.css" />
-    <link rel="stylesheet" href="/css/LineIcons.2.0.css" />
-    <link rel="stylesheet" href="/css/tiny-slider.css" />
-    <link rel="stylesheet" href="/css/animate.css" />
-    <link rel="stylesheet" href="/css/glightbox.min.css" />
-    <link rel="stylesheet" href="/css/main.css" />
-  </head>
-  <body>
-    <!--[if lte IE 9]>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Finance, Accounting, Management, Energy with AI Conference - Scientific Commitee</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.svg" />
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- ========================= CSS here ========================= -->
+  <link rel="stylesheet" href="/css/bootstrap-5.0.0-beta2.min.css" />
+  <link rel="stylesheet" href="/css/LineIcons.2.0.css" />
+  <link rel="stylesheet" href="/css/tiny-slider.css" />
+  <link rel="stylesheet" href="/css/animate.css" />
+  <link rel="stylesheet" href="/css/glightbox.min.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+  <!--[if lte IE 9]>
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
         <a href="https://browsehappy.com/">upgrade your browser</a> to improve
@@ -26,79 +28,86 @@
       </p>
     <![endif]-->
 
-    <!-- ========================= preloader start ========================= -->
-    <div class="preloader">
-      <div class="loader">
-        <div class="spinner">
-          <div class="spinner-container">
-            <div class="spinner-rotator">
-              <div class="spinner-left">
-                <div class="spinner-circle"></div>
-              </div>
-              <div class="spinner-right">
-                <div class="spinner-circle"></div>
-              </div>
+  <!-- ========================= preloader start ========================= -->
+  <div class="preloader">
+    <div class="loader">
+      <div class="spinner">
+        <div class="spinner-container">
+          <div class="spinner-rotator">
+            <div class="spinner-left">
+              <div class="spinner-circle"></div>
+            </div>
+            <div class="spinner-right">
+              <div class="spinner-circle"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- preloader end -->
+  </div>
+  <!-- preloader end -->
 
-    <!-- ========================= header start ========================= -->
-       <%- include('./helpers/header') %>
+  <!-- ========================= header start ========================= -->
+  <%- include('./helpers/header') %>
 
     <!-- ========================= header end ========================= -->
 
     <!-- ========================= pricing-section start ========================= -->
     <section id="pricing" class="pricing-section pt-120">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-10">
-                    <div class="section-title text-center pb-25">
-                        <h3 class="title">Scientific Committee</h3>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-md-10">
+            <div class="section-title text-center pb-25">
+              <h3 class="title">Scientific Committee</h3>
             </div>
-            <div class="row">
-                <% sc.forEach(function(member) { %>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-pricing mt-30 text-center">
-                            <div class="pricing-image mb-2">
-                                <% if (member.photo_url) { %>
-                                    <img src="<%= member.photo_url %>" alt="<%= member.name %>" class="img-thumbnail" style="height:200px;width:200px;object-fit: cover;">
-                                <% } else { %>
-                                    <img src="/img/speaker/default.jpg" alt="Default Photo" class="img-thumbnail" style="height:200px;width:200px;object-fit: cover; ">
-                                <% } %>
-                            </div>
-                            <div class="pricing-content">
-                                <h5 class="pricing-title"><%= member.name %></h5>
-                                <p class="text"><%= member.university %>, <%= member.country %></p>
-                            </div>
-                        </div>
-                    </div>
-                <% }); %>
-            </div>
+          </div>
         </div>
+        <div class="row">
+          <% sc.forEach(function(member) { %>
+            <div class="col-lg-3 col-md-4 col-sm-6 d-flex justify-content-center text-center">
+              <div class="single-pricing mt-30 text-center">
+                <div class="pricing-image mb-2">
+                  <% if (member.photo_url) { %>
+                    <img src="<%= member.photo_url %>" alt="<%= member.name %>" class="img-thumbnail"
+                      style="height:200px;width:200px;object-fit: cover;">
+                    <% } else { %>
+                      <img src="/img/speaker/default.jpg" alt="Default Photo" class="img-thumbnail"
+                        style="height:200px;width:200px;object-fit: cover;">
+                      <% } %>
+                </div>
+                <div class="pricing-content">
+                  <h5 class="pricing-title">
+                    <%= member.name %>
+                  </h5>
+                  <p class="text">
+                    <%= member.university %>, <%= member.country %>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <% }); %>
+        </div>
+      </div>
     </section>
     <!-- ========================= pricing-section end ========================= -->
 
     <!-- ========================= footer start ========================= -->
     <%- include('./helpers/footer') %>
-    <!-- ========================= footer end ========================= -->
+      <!-- ========================= footer end ========================= -->
 
-    <!-- ========================= scroll-top ========================= -->
-    <a href="#" class="scroll-top btn-hover">
-      <i class="lni lni-chevron-up"></i>
-    </a>
+      <!-- ========================= scroll-top ========================= -->
+      <a href="#" class="scroll-top btn-hover">
+        <i class="lni lni-chevron-up"></i>
+      </a>
 
-    <!-- ========================= JS here ========================= -->
-    <script src="/js/bootstrap-5.0.0-beta2.min.js"></script>
-    <script src="/js/tiny-slider.js"></script>
-    <script src="/js/count-up.min.js"></script>
-    <script src="/js/wow.min.js"></script>
-    <script src="/js/glightbox.min.js"></script>
-    <script src="/js/polyfill.js"></script>
-    <script src="/js/main.js"></script>
-  </body>
+      <!-- ========================= JS here ========================= -->
+      <script src="/js/bootstrap-5.0.0-beta2.min.js"></script>
+      <script src="/js/tiny-slider.js"></script>
+      <script src="/js/count-up.min.js"></script>
+      <script src="/js/wow.min.js"></script>
+      <script src="/js/glightbox.min.js"></script>
+      <script src="/js/polyfill.js"></script>
+      <script src="/js/main.js"></script>
+</body>
+
 </html>
