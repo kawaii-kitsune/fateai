@@ -504,7 +504,21 @@ router.get('/messages', isAuthenticated, (req, res) => {
     res.render('admin/messages/messages', { messages: results, user: req.session.user });
   });
 });
-
+// View message details
+router.get('/messages/view/:id', isAuthenticated, (req, res) => {
+  const messageId = req.params.id;
+  const query = 'SELECT * FROM contact_messages WHERE id = ?';
+  connection.query(query, [messageId], (err, results) => {
+    if (err) {
+      console.error('Error fetching message:', err);
+      return res.status(500).send('Error fetching message');
+    }
+    if (results.length === 0) {
+      return res.status(404).send('Message not found');
+    }
+    res.render('admin/messages/view-message', { message: results[0], user: req.session.user });
+  });
+});
 // Handle message deletion
 router.get('/messages/delete/:id', isAdmin, (req, res) => {
   const messageId = req.params.id;

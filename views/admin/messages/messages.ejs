@@ -31,8 +31,9 @@
                                                 <th>Full Name</th>
                                                 <th>Email Address</th>
                                                 <th>Subject</th>
-                                                <th>Message</th>
+                                                <!-- <th>Message</th> -->
                                                 <th>Created At</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -42,8 +43,11 @@
                                                     <td><%= message.fullname %></td>
                                                     <td><%= message.emailaddress %></td>
                                                     <td><%= message.subject %></td>
-                                                    <td><%= message.message %></td>
+                                                 
                                                     <td><%= new Date(message.created_at).toLocaleDateString() %></td>
+                                                    <td>
+                                                        <a href="/admin/messages/view/<%= message.id %>" class="btn btn-primary btn-sm">View</a>
+                                                    </td>
                                                 </tr>
                                             <% }); %>
                                         </tbody>
