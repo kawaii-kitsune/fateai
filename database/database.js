@@ -1,20 +1,19 @@
 const mysql = require('mysql2');
 
-// Update the host to match your Docker container settings
 const connection = mysql.createConnection({
-  host: 'localhost', // or 'mysql' if you were using Docker Compose networking
-  user: 'root',
-  password: 'rootpassword',
+  host: 'mysql',  // <-- Use MySQL service name from docker-compose
+  user: 'evently_user',
+  password: 'evently_password',
   database: 'evently',
   port: 3306
 });
 
 connection.connect((err) => {
   if (err) {
-    console.error('Error connecting to the database: ', err.stack);
+    console.error('Error connecting to database:', err);
     return;
   }
-  console.log('Connected to the MySQL database');
+  console.log('Connected to MySQL database!');
 });
 
 module.exports = connection;

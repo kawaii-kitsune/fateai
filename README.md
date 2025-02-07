@@ -20,10 +20,10 @@
 
 3. **Start Docker Compose:**
     ```sh
-    docker-compose up -d
+    docker-compose up 
     ```
-
-4. **Start the Node.js application:**
+## For testing:
+ **Start the Node.js application:**
     ```sh
     npm start
     ```
