@@ -1,7 +1,7 @@
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
-  host: 'mysql',  // <-- Use MySQL service name from docker-compose
+  host: 'mysql_db',  // <-- Use MySQL service name from docker-compose
   user: 'evently_user',
   password: 'evently_password',
   database: 'evently',
