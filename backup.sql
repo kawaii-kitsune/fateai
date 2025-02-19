@@ -357,7 +357,7 @@ CREATE TABLE `speakers` (
 
 LOCK TABLES `speakers` WRITE;
 /*!40000 ALTER TABLE `speakers` DISABLE KEYS */;
-INSERT INTO `speakers` VALUES (1,'phort','Kolokouris','Msc Computer Engineer','HMU','babiskolokouris@gmial.com','This is a bio','https://media.licdn.com/dms/image/v2/D4D03AQEjMNw0XRIPaQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1697530539818?e=1743638400&v=beta&t=sqSTRbLbkfSlRF00ZORlxwCgHKJA_d4h6vUqkSi7dvo',2,'2025-01-27 10:31:57','2025-01-29 10:29:38'),(2,'phort','Kolokouris','KAti','Kapou ','kapoio@sekapoiodomain.gr','bio','/img/speaker/speaker-6.jpg',2,'2025-01-27 11:20:14','2025-01-29 10:29:38');
+
 /*!40000 ALTER TABLE `speakers` ENABLE KEYS */;
 UNLOCK TABLES;
 
