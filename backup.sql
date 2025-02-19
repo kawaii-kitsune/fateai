@@ -432,3 +432,22 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2025-02-04  9:09:34
+
+CREATE TABLE scientific_committee (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    university VARCHAR(255),
+    country VARCHAR(255),
+    photo_url VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE contact_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fullname VARCHAR(255) NOT NULL,
+    emailaddress VARCHAR(255) NOT NULL,
+    subject VARCHAR(255),
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
