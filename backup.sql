@@ -267,6 +267,7 @@ LOCK TABLES `logs` WRITE;
 /*!40000 ALTER TABLE `logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
 --
 -- Table structure for table `pricing`
 --
@@ -411,6 +412,41 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `scientific_committee`;
+
+CREATE TABLE `scientific_committee` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL,
+    `university` VARCHAR(255),
+    `country` VARCHAR(255),
+    `photo_url` VARCHAR(255),
+    `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `contact_messages`;
+
+CREATE TABLE `contact_messages` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `fullname` VARCHAR(255) NOT NULL,
+    `emailaddress` VARCHAR(255) NOT NULL,
+    `subject` VARCHAR(255),
+    `message` TEXT,
+    `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `papers`;
+
+CREATE TABLE `papers` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL,
+    `university` VARCHAR(255),
+    `email` VARCHAR(255) NOT NULL,
+    `file_path` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
@@ -433,21 +469,5 @@ UNLOCK TABLES;
 
 -- Dump completed on 2025-02-04  9:09:34
 
-CREATE TABLE scientific_committee (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    university VARCHAR(255),
-    country VARCHAR(255),
-    photo_url VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
-CREATE TABLE contact_messages (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    fullname VARCHAR(255) NOT NULL,
-    emailaddress VARCHAR(255) NOT NULL,
-    subject VARCHAR(255),
-    message TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
