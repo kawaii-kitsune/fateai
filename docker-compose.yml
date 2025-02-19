@@ -14,12 +14,12 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./backup.sql:/docker-entrypoint-initdb.d/backup.sql
+      - ./backup.sql:/docker-entrypoint-initdb.d/backup.sql  # Will only work on first run
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
-      retries: 5  # Increased retries
+      retries: 5
 
   node:
     image: node:14
@@ -28,10 +28,10 @@ services:
     working_dir: /app
     volumes:
       - .:/app
-    command: sh -c "sleep 10 && npm start"  # Small delay before starting
+    command: sh -c "sleep 10 && npm start"
     depends_on:
       mysql:
-        condition: service_healthy  # Wait for MySQL to be healthy
+        condition: service_healthy
     ports:
       - "3000:3000"
 
