@@ -208,39 +208,7 @@
       </div>
     </section>
     <!-- ========================= scientific-committee start ========================= -->
-    <section id="committee" class="committee-section pt-150">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-xxl-6 col-xl-7 col-lg-8">
-            <div class="section-title text-center mb-60">
-              <h1>Scientific Committee</h1>
-              <p>Meet the esteemed members of our scientific committee who bring a wealth of knowledge and expertise to
-                the conference.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="row justify-content-center">
-          <% committee.forEach(member=> { %>
-            <div class="col-lg-4 col-md-8 col-sm-10">
-              <div class="single-member">
-                <img src="<%= member.photo_url ? member.photo_url : '/img/speaker/default.jpg' %>" alt="Member Image"
-                  class="rounded-circle img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
-                <h4>
-                  <%= member.name %>
-                </h4>
-                <p>
-                  <%= member.university %>, <%= member.country %>
-                </p>
-                <% if (member.url) { %>
-                  <a href="<%= member.url %>" class="member-link">More Info</a>
-                  <% } %>
-              </div>
-            </div>
-            <% }); %>
-        </div>
-      </div>
-    </section>
+   <%- include('./helpers/comitee') %>
     <!-- ========================= scientific-committee end ========================= -->
     <!-- ========================= about-section end ========================= -->
 

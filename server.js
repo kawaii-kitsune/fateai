@@ -10,7 +10,7 @@ const contactRouter = require('./routes/user/contact');
 const scheduleRouter = require('./routes/user/schedule');
 const cfpRouter = require('./routes/user/cfp');
 const uploadsRouter = require('./routes/user/uploads');
-const adminRouter = require('./routes/admin/index');
+// const adminRouter = require('./routes/admin/index');
 const bodyParser = require('body-parser');
 const apiRoutes = require('./routes/api/crud');
 const scRoutes = require('./routes/user/sc');
@@ -45,7 +45,7 @@ app.use('/contact', contactRouter);
 app.use('/schedule', scheduleRouter);
 app.use('/cfp', cfpRouter);
 app.use('/uploads', uploadsRouter);
-app.use('/admin', adminRouter);
+// app.use('/admin', adminRouter);
 app.use('/api', apiRoutes);
 app.use('/sc', scRoutes);
 // Start server

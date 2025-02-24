@@ -5,7 +5,7 @@ const session = require('express-session');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
-const connection = require('../../database/database'); // Assuming you have a database connection module
+// const connection = require('../../database/database'); // Assuming you have a database connection module
 
 // Set up session middleware
 router.use(session({

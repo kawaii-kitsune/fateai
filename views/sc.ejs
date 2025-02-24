@@ -53,42 +53,7 @@
     <!-- ========================= header end ========================= -->
 
     <!-- ========================= pricing-section start ========================= -->
-    <section id="pricing" class="pricing-section pt-120">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8 col-md-10">
-            <div class="section-title text-center pb-25">
-              <h3 class="title">Scientific Committee</h3>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <% sc.forEach(function(member) { %>
-            <div class="col-lg-3 col-md-4 col-sm-6 d-flex justify-content-center text-center">
-              <div class="single-pricing mt-30 text-center">
-                <div class="pricing-image mb-2">
-                  <% if (member.photo_url) { %>
-                    <img src="<%= member.photo_url %>" alt="<%= member.name %>" class="img-thumbnail"
-                      style="height:200px;width:200px;object-fit: cover;">
-                    <% } else { %>
-                      <img src="/img/speaker/default.jpg" alt="Default Photo" class="img-thumbnail"
-                        style="height:200px;width:200px;object-fit: cover;">
-                      <% } %>
-                </div>
-                <div class="pricing-content">
-                  <h5 class="pricing-title">
-                    <%= member.name %>
-                  </h5>
-                  <p class="text">
-                    <%= member.university %>, <%= member.country %>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <% }); %>
-        </div>
-      </div>
-    </section>
+   <%- include('./helpers/comitee') %>
     <!-- ========================= pricing-section end ========================= -->
 
     <!-- ========================= footer start ========================= -->
