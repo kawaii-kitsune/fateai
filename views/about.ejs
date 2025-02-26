@@ -47,188 +47,30 @@
   </div>
   <!-- preloader end -->
 
-  <!-- ========================= header start ========================= -->
   <%- include('./helpers/header') %>
-    <!-- ========================= header end ========================= -->
 
-    <!-- ========================= about-section start ========================= -->
-    <section id="about" class="about-section pt-150">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-xxl-6 col-xl-7 col-lg-8">
-            <div class="section-title text-center mb-60">
-              <h1>About the Conference</h1>
-              <p>Join us for an insightful conference on Finance, Accounting, Management, and Energy with AI. Explore
-                the latest trends and innovations in these fields and learn from industry experts.</p>
-            </div>
-          </div>
-        </div>
+    <%- include('./helpers/about/info') %>
+      <%- include('./helpers/cfp/topics') %>
+        <%- include('./helpers/comitee') %>
 
-        <div class="row justify-content-center">
-          <div class="col-lg-4 col-md-8 col-sm-10">
-            <div class="single-feature">
-              <i class="lni lni-investment"></i>
-              <h4>Finance</h4>
-              <p>Discover how AI is transforming the finance industry, from automated trading to risk management and
-                beyond.</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-8 col-sm-10">
-            <div class="single-feature">
-              <i class="lni lni-calculator"></i>
-              <h4>Accounting</h4>
-              <p>Learn about the latest AI-driven accounting tools and techniques that are streamlining financial
-                reporting and compliance.</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-8 col-sm-10">
-            <div class="single-feature">
-              <i class="lni lni-management"></i>
-              <h4>Management</h4>
-              <p>Explore how AI is enhancing management practices, improving decision-making, and driving organizational
-                efficiency.</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-8 col-sm-10">
-            <div class="single-feature">
-              <i class="lni lni-energy"></i>
-              <h4>Energy</h4>
-              <p>Understand the impact of AI on the energy sector, from optimizing energy consumption to advancing
-                renewable energy technologies.</p>
-            </div>
-          </div>
-        </div>
-        <a href="/speakers" class="main-btn btn-hover">Speakers</a>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="content m-3 p-4">
-              <h2>Topics of Interest</h2>
-              <div class="row g-3">
-                <div class="col-sm-2">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-content text-secondary">AI-driven Financial Decision Making
-                        and
-                        Risk
-                        Management</h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-content text-secondary">AI Applications in Accounting and
-                        Auditing
-                      </h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-content text-secondary">AI-enabled Management and
-                        Organizational
-                        Transformation
-                      </h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-content text-secondary">AI in Energy Management and
-                        Sustainability
-                      </h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-content text-secondary">ESG Integration and AI</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row g-3 mt-3">
-                <div class="col-sm-2">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-content text-secondary">AI Ethics and Governance in FAME
-                        sectors
-                      </h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-content text-secondary">AI-powered Customer Experience in
-                        Financial
-                        Services</h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-content text-secondary">AI and Blockchain in Finance and
-                        Energy
-                      </h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-content text-secondary">AI in Predictive Analytics for FAME
-                        sectors
-                      </h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h5 class="card-content text-secondary">AI and Human-Machine Collaboration
-                        in
-                        FAME
-                      </h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- ========================= scientific-committee start ========================= -->
-   <%- include('./helpers/comitee') %>
-    <!-- ========================= scientific-committee end ========================= -->
-    <!-- ========================= about-section end ========================= -->
 
-    <!-- ========================= footer start ========================= -->
-    <%- include('./helpers/footer') %>
-      <!-- ========================= footer end ========================= -->
+          <!-- ========================= footer start ========================= -->
+          <%- include('./helpers/footer') %>
+            <!-- ========================= footer end ========================= -->
 
-      <!-- ========================= scroll-top ========================= -->
-      <a href="#" class="scroll-top btn-hover">
-        <i class="lni lni-chevron-up"></i>
-      </a>
+            <!-- ========================= scroll-top ========================= -->
+            <a href="#" class="scroll-top btn-hover">
+              <i class="lni lni-chevron-up"></i>
+            </a>
 
-      <!-- ========================= JS here ========================= -->
-      <script src="/js/bootstrap-5.0.0-beta2.min.js"></script>
-      <script src="/js/tiny-slider.js"></script>
-      <script src="/js/count-up.min.js"></script>
-      <script src="/js/wow.min.js"></script>
-      <script src="/js/glightbox.min.js"></script>
-      <script src="/js/polyfill.js"></script>
-      <script src="/js/main.js"></script>
+            <!-- ========================= JS here ========================= -->
+            <script src="/js/bootstrap-5.0.0-beta2.min.js"></script>
+            <script src="/js/tiny-slider.js"></script>
+            <script src="/js/count-up.min.js"></script>
+            <script src="/js/wow.min.js"></script>
+            <script src="/js/glightbox.min.js"></script>
+            <script src="/js/polyfill.js"></script>
+            <script src="/js/main.js"></script>
 </body>
 
 </html>

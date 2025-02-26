@@ -61,31 +61,26 @@
             </div>
           </div>
         </div>
-        <div class="row justify-content-center">
-          <% speakers.forEach(speaker => { %>
-            <div class="col-lg-4 col-md-6 col-sm-10">
+        <div class="row justify-content-center " hidden>
+        
+            <div class="col-lg-4 col-md-6 col-sm-10 ">
               <div class="single-speaker">
                 <div class="speaker-img">
-                  <% if (speaker.photo_url) { %>
-                    <img src="<%= speaker.photo_url %>" class="img-thumbnail rounded-circle mb-2"
-                      alt="<%= speaker.first_name %> <%= speaker.last_name %>">
-                    <% } else { %>
-                      <img
-                        src="/img/speaker/speaker-1.jpg"
-                        class="img-thumbnail rounded-circle mb-2"
-                        alt="<%= speaker.first_name %> <%= speaker.last_name %>">
-                      <% } %>
+                 
+                    <img src="" class="img-thumbnail rounded-circle mb-2"
+                      alt="">
+                  
                 </div>
                 <div class="speaker-content">
-                  <h3><%= speaker.first_name %> <%= speaker.last_name %></h3>
-                  <span><%= speaker.title %>, <%= speaker.organization %></span>
+                  <h3></h3>
+                  <span></span>
     
-                  <a href="/speakers/<%=speaker.speaker_id %>" class="main-btn btn-hover mt-2 mb-2">Learn More</a>
+                  <a href="" class="main-btn btn-hover mt-2 mb-2">Learn More</a>
                 
                 </div>
               </div>
             </div>
-          <% }) %>
+         
         </div>
       </div>
     </section>
