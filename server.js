@@ -12,7 +12,7 @@ const cfpRouter = require('./routes/user/cfp');
 const uploadsRouter = require('./routes/user/uploads');
 // const adminRouter = require('./routes/admin/index');
 const bodyParser = require('body-parser');
-const apiRoutes = require('./routes/api/crud');
+// const apiRoutes = require('./routes/api/crud');
 const scRoutes = require('./routes/user/sc');
 // Serve Bootstrap Icons CSS
 // Set EJS as the view engine
@@ -46,7 +46,7 @@ app.use('/schedule', scheduleRouter);
 app.use('/cfp', cfpRouter);
 app.use('/uploads', uploadsRouter);
 // app.use('/admin', adminRouter);
-app.use('/api', apiRoutes);
+// app.use('/api', apiRoutes);
 app.use('/sc', scRoutes);
 // Start server
 app.listen(3000, () => {

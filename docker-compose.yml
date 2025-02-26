@@ -1,26 +1,6 @@
 version: '3.1'
 
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: mysql_db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: evently
-      MYSQL_USER: evently_user
-      MYSQL_PASSWORD: evently_password
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-      - ./backup.sql:/docker-entrypoint-initdb.d/backup.sql:z  # Will only work on first run
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   node:
     image: node:14
     container_name: node_app
@@ -29,11 +9,5 @@ services:
     volumes:
       - .:/app
     command: sh -c "sleep 10 && npm start"
-    depends_on:
-      mysql:
-        condition: service_healthy
     ports:
       - "3000:3000"
-
-volumes:
-  mysql_data:
